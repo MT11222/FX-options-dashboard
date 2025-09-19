@@ -67,6 +67,13 @@ class FX_Options_Model:
         S = np.full(n_paths, self.S0, dtype=float)
         ever_hit = np.zeros(n_paths, dtype=bool)  # has the barrier been hit at least once
         logB = np.log(barrier)
+        # Initial t=0 check
+        if "down" in ko_type:
+            ever_hit |= (S <= barrier)
+        elif "up" in ko_type:
+            ever_hit |= (S >= barrier)
+        else:
+            raise ValueError("ko_type must be 'down-and-out', 'up-and-out', 'down-and-in', or 'up-and-in'")
 
         for k in range(n_steps):
             S_old = S.copy()
