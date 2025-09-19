@@ -128,7 +128,6 @@ class FX_Options_Model:
     def price_vol_knockout(self, vol_barrier, call_or_put="call",
                            num_simulations=100000, n_steps=252, reduce_variance=True, seed=None):
         # Standard vol KO: knocks out when annualised realised vol >= vol_barrier
-        ann_factor = 252
         dt = self.T / n_steps
 
         Z = self._mc_simulation(num_simulations, n_steps, reduce_variance, seed)
@@ -141,7 +140,7 @@ class FX_Options_Model:
         alive = np.ones(n_paths, dtype=bool)  # not knocked out yet by vol
         cum_vol = np.zeros(n_paths, float)
 
-        budget_step = (vol_barrier ** 2) / ann_factor
+        budget_step = (vol_barrier ** 2) * dt
         cum_budget = 0.0
 
         for k in range(n_steps):
