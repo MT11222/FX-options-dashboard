@@ -185,9 +185,9 @@ class FX_Options_Model:
     def convergence_data(self, option_type, num_points=8, barrier=None,
                          ko_type=None, n_steps=252, vol_barrier=None, call_or_put="call"):
         if option_type in ("knockout", "VKO"):
-            min_exp, max_exp = 3, 5   # 1e3 … 1e5 to avoid OOM
+            min_N, max_N = 3, 5   # 1e3 … 1e5 to avoid OOM
         else:
-            min_exp, max_exp = 3, 6   # 1e3 … 1e6 for vanilla
+            min_N, max_N = 3, 6   # 1e3 … 1e6 for vanilla
             Ns = np.logspace(min_N, max_N, num_points, dtype=int)
 
         prices, errors = [], []
