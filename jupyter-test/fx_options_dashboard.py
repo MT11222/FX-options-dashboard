@@ -188,7 +188,7 @@ class FX_Options_Model:
             min_N, max_N = 3, 5   # 1e3 … 1e5 to avoid OOM
         else:
             min_N, max_N = 3, 6   # 1e3 … 1e6 for vanilla
-            Ns = np.logspace(min_N, max_N, num_points, dtype=int)
+        Ns = np.logspace(min_N, max_N, num_points, dtype=int)
 
         prices, errors = [], []
         for N in Ns:
